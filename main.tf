@@ -47,7 +47,3 @@ resource "cloudflare_record" "a" {
   value = each.value.target
   ttl   = 1
 }
-
-output zone_id {
-  value = data.cloudflare_zone.zone.id
-}
