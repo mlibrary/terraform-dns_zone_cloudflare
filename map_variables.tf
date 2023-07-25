@@ -38,26 +38,19 @@ locals {
         for name in flatten([names]) : {
           name : name
           target : target
+          was : "${name}::${target}"
         }
       ]
       ]) :
-      "${i.name}::${i.target}" => i
+      "${i.name}" => i
     },
 
     { for name, target in var.cname_records :
-      "${name}::${target}" => {
+      "${name}" => {
         name : name
         target : target
+        was : "${name}::${target}"
       }
     }
   )
-}
-
-output "debug" {
-  value = {
-    a_records_map     = local.a_records_map
-    ns_records_map    = local.ns_records_map
-    txt_records_map   = local.txt_records_map
-    cname_records_map = local.cname_records_map
-  }
 }
