@@ -38,7 +38,6 @@ locals {
         for name in flatten([names]) : {
           name : name
           target : target
-          was : "${name}::${target}"
         }
       ]
       ]) :
@@ -49,7 +48,6 @@ locals {
       "${name}" => {
         name : name
         target : target
-        was : "${name}::${target}"
       }
     }
   )
