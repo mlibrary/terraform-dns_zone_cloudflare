@@ -38,11 +38,6 @@ resource "cloudflare_record" "cname" {
   value    = each.value.target
   ttl      = 1
 }
-# moved {
-#   for_each = local.cname_records_map
-#   from     = cloudflare_record.cname[each.value.was]
-#   to       = cloudflare_record.cname[each.value.name]
-# }
 
 resource "cloudflare_record" "a" {
   for_each = local.a_records_map
