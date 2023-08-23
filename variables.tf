@@ -38,3 +38,9 @@ variable "cnames_many_to_one" {
   type        = any
   default     = {}
 }
+
+variable "allow_overwrite" {
+  description = "Enable 'allow_overwrite' on all dns records under this module."
+  type        = bool
+  default     = false
+}

@@ -9,6 +9,8 @@ resource "cloudflare_record" "txt" {
   name     = each.value.name
   value    = each.value.target
   ttl      = 1 # this means use the Cloudflare default, not literally one second
+
+  allow_overwrite = var.allow_overwrite
 }
 
 resource "cloudflare_record" "mx" {
@@ -19,6 +21,8 @@ resource "cloudflare_record" "mx" {
   value    = each.value.target
   priority = each.value.priority
   ttl      = 3600
+
+  allow_overwrite = var.allow_overwrite
 }
 
 resource "cloudflare_record" "ns" {
@@ -28,6 +32,8 @@ resource "cloudflare_record" "ns" {
   name     = each.value.name
   value    = each.value.target
   ttl      = 3600
+
+  allow_overwrite = var.allow_overwrite
 }
 
 resource "cloudflare_record" "cname" {
@@ -37,6 +43,8 @@ resource "cloudflare_record" "cname" {
   name     = each.value.name
   value    = each.value.target
   ttl      = 1
+
+  allow_overwrite = var.allow_overwrite
 }
 
 resource "cloudflare_record" "a" {
@@ -46,4 +54,6 @@ resource "cloudflare_record" "a" {
   name     = each.value.name
   value    = each.value.target
   ttl      = 1
+
+  allow_overwrite = var.allow_overwrite
 }
