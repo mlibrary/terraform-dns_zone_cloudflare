@@ -42,6 +42,7 @@ resource "cloudflare_record" "cname" {
   type     = "CNAME"
   name     = each.value.name
   value    = each.value.target
+  proxied  = each.value.proxied
   ttl      = 1
 
   allow_overwrite = var.allow_overwrite
@@ -53,6 +54,7 @@ resource "cloudflare_record" "a" {
   type     = "A"
   name     = each.value.name
   value    = each.value.target
+  proxied  = each.value.proxied
   ttl      = 1
 
   allow_overwrite = var.allow_overwrite

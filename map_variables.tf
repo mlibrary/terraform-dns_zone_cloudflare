@@ -1,14 +1,29 @@
 locals {
-  a_records_map = { for i in flatten([
-    for name, targets in var.a_records : [
-      for target in flatten([targets]) : {
-        name : name
-        target : target
-      }
-    ]
-    ]) :
-    "${i.name}::${i.target}" => i
-  }
+  a_records_map = merge(
+    { for i in flatten([
+      for name, targets in var.a_records : [
+        for target in flatten([targets]) : {
+          name : name
+          target : target
+          proxied : false
+        }
+      ]
+      ]) :
+      "${i.name}::${i.target}" => i
+    },
+
+    { for i in flatten([
+      for name, targets in var.proxied_a_records : [
+        for target in flatten([targets]) : {
+          name : name
+          target : target
+          proxied : true
+        }
+      ]
+      ]) :
+      "${i.name}::${i.target}" => i
+    },
+  )
 
   ns_records_map = { for i in flatten([
     for name, targets in var.ns_records : [
@@ -38,6 +53,7 @@ locals {
         for name in flatten([names]) : {
           name : name
           target : target
+          proxied : false
         }
       ]
       ]) :
@@ -48,7 +64,16 @@ locals {
       "${name}" => {
         name : name
         target : target
+        proxied : false
       }
-    }
+    },
+
+    { for name, target in var.proxied_cname_records :
+      "${name}" => {
+        name : name
+        target : target
+        proxied : true
+      }
+    },
   )
 }

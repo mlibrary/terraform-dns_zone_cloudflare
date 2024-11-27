@@ -27,7 +27,19 @@ variable "a_records" {
   default     = {}
 }
 
+variable "proxied_a_records" {
+  description = "Map of A records. Keys are the record names, values are String or String[] containing record data."
+  type        = any
+  default     = {}
+}
+
 variable "cname_records" {
+  description = "Map of CNAME records. Keys are the record names, values are String or String[] containing record data."
+  type        = any
+  default     = {}
+}
+
+variable "proxied_cname_records" {
   description = "Map of CNAME records. Keys are the record names, values are String or String[] containing record data."
   type        = any
   default     = {}
