@@ -7,7 +7,7 @@ resource "cloudflare_record" "txt" {
   zone_id  = data.cloudflare_zone.zone.id
   type     = "TXT"
   name     = each.value.name
-  value    = each.value.target
+  content  = each.value.target
   ttl      = 1 # this means use the Cloudflare default, not literally one second
 
   allow_overwrite = var.allow_overwrite
@@ -18,7 +18,7 @@ resource "cloudflare_record" "mx" {
   zone_id  = data.cloudflare_zone.zone.id
   type     = "MX"
   name     = each.value.name
-  value    = each.value.target
+  content  = each.value.target
   priority = each.value.priority
   ttl      = 3600
 
@@ -30,7 +30,7 @@ resource "cloudflare_record" "ns" {
   zone_id  = data.cloudflare_zone.zone.id
   type     = "NS"
   name     = each.value.name
-  value    = each.value.target
+  content  = each.value.target
   ttl      = 3600
 
   allow_overwrite = var.allow_overwrite
@@ -41,7 +41,7 @@ resource "cloudflare_record" "cname" {
   zone_id  = data.cloudflare_zone.zone.id
   type     = "CNAME"
   name     = each.value.name
-  value    = each.value.target
+  content  = each.value.target
   proxied  = each.value.proxied
   ttl      = 1
 
@@ -53,7 +53,7 @@ resource "cloudflare_record" "a" {
   zone_id  = data.cloudflare_zone.zone.id
   type     = "A"
   name     = each.value.name
-  value    = each.value.target
+  content  = each.value.target
   proxied  = each.value.proxied
   ttl      = 1
 
